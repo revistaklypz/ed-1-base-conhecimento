@@ -6,7 +6,7 @@ negligenciados quando os mesmos não cuprem o papel didático.
 # Objetivos
 ## Ferramentas
 | Ferramenta | Descrição |
-|: -- |: -- |
+|:-- |:-- |
 | Visual Studio | IDE para desenvolvimento do Aplicativo |
 | MySQL Workbench | IDE para operações no banco de dados |
 | MySQL Server | Serviço de banco de dados Mysql para base de dados |
