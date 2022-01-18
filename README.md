@@ -13,7 +13,7 @@ negligenciados quando os mesmos não cuprem o papel didático.
 
 ## Pré-requisito
 | Conteúdo |
-|: ------- |
+|:------- |
 | Entendimento de Projeto WEB API Visual Studio |
 | Entendimento de Mysql básico |
 | Entendimento de instalação de serviço Mysql (localhost) |
