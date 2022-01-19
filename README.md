@@ -3,7 +3,7 @@ Este projeto visa o aprendizado do leitor, portanto não é aconcelhável a util
 já que os protocolo de segurança e tratamento de excessão foram 
 negligenciados quando os mesmos não cuprem o papel didático.
 
-# Objetivos
+# Visão Geral
 ## Ferramentas
 | Ferramenta | Descrição |
 |:-- |:-- |
@@ -16,22 +16,19 @@ negligenciados quando os mesmos não cuprem o papel didático.
 |:------- |
 | Entendimento de Projeto WEB API Visual Studio |
 | Entendimento de Mysql básico |
-| Entendimento de instalação de serviço Mysql (localhost) |
+| Acesso a um serviço MySql |
 
-## Assuntos
+## Assuntos abordados
+- Arquitetura de software **DDD**
+- Injeção de dependência
+- Web API .NET Core 3.1
 
 # O Projeto
 ## Definição
-Uma base de conhecimento é um conjunto de informações que vão sendo captadas para resolver 
-problemas semelhantes no futuro. É como se fosse um conjunto de dúvidas **resolvidas**
-agrupadas por categorias.
-
-A estrutura é simples:
-- Tabela de categorias
-- Tabela de conhecimento (base de conhecimento)
-
-Já que não iremos esquentar a cabeça com a complexidade das telas, vamos tentar ajustar nosso
-__backend__ para que você obtenha mais conhecimento.
+Uma base de conhecimento é um conjunto de perguntas e respostas agrupadas por categorias com o 
+objetivo de ofertar soluções para dúvidas do usuário. Você pode se deparar nos sites com um item
+chamado "FAQ" ou "Perguntas Frequentes" ou "knowledge" ou "troubleshoot", basicamente todos
+tem a mesma função, possuem um conjunto de respostas para perguntas ou dúvidas.
 
 ### Requisitos Funcionais
 - Um sistema de cadastro de Base de conhecimento
@@ -44,9 +41,14 @@ __backend__ para que você obtenha mais conhecimento.
 - Banco de dados MySql
 
 ## Preparando o Projeto
-> Crie um schema no banco de dados MYSQL e crie a estrutura de dados
+> Crie um schema no banco de dados MYSQL e execute o script de criação da estrutura
 
-A estrutura abaixo deverá cumprir os requisitos apontados.
+A estrutura é simples:
+- Tabela de categorias
+- Tabela de conhecimento (base de conhecimento)
+
+**ANEXO 1**
+
 ```sql
 ---------------------------------------------------
 ---- SQL Create Database
@@ -54,14 +56,12 @@ A estrutura abaixo deverá cumprir os requisitos apontados.
 
 -- Criando tabela de categoria
 create table categoria (
-    id					int not null auto_increment primary key,
-    criado_em			datetime not null default now(),
-    modificado_em		datetime not null default now(),
-    nome				varchar(30) not null,
-    apelido				varchar(30) not null unique,
-    descricao			varchar(250) null,
-    
-    constraint fk_categoria_categoria_pai foreign key (categoria_pai_id) references categoria(id)
+    id                  int not null auto_increment primary key,
+    criado_em           datetime not null default now(),
+    modificado_em       datetime not null default now(),
+    nome                varchar(30) not null,
+    apelido             varchar(30) not null unique,
+    descricao           varchar(250) null
 );
 
 -- Criando tabela de base de conhecimento
@@ -72,8 +72,7 @@ create table base_conhecimento(
     categoria_id            int null,
     titulo                  varchar(150) not null,
     apelido                 varchar(150) not null unique,
-    descricao_rapida        varchar(250) null,
-    descricao               text not null,
+    descricao               varchar(900) null,
     ativo                   bit not null default 1,
     
     constraint fk_baseconhecimento_categoria foreign key (categoria_id) references categoria(id)
@@ -87,7 +86,7 @@ select
     modificado_em       ModificadoEm,
     nome                Nome,
     apelido             Apelido,
-    descricao           Descricao,
+    descricao           Descricao
 
 from categoria;
 
@@ -100,17 +99,18 @@ select
     categoria_id        CategoriaId,
     titulo              Titulo,
     apelido             Apelido,
-    descricao_rapida    DescricaoRapida,
     descricao           Descricao,
     ativo               Ativo
 
 from base_conhecimento;
 ```
 
-## Regras de negócio
-### Definições
-Este tipo de aplicação possui 2 lados:
-- Lado de quem cadastra (admin)
-- Lado de quem usa (livre)
+# Teorias Aplicadas
+## Arquitetura do projeto
+> Decidi utilizar o modelo DDD, (é possível entender muito desse padrão de projetos na internet).
 
-Se é assim, os domínios também devem ser separados, pois cumprem funções diferentes no código.
+|| Categoria | Base de Conhecimento | API  |
+|:--|:--|:--|--|
+|App| DDD
+
+> Aqui eu vou focar na prática, em outro momento falaremos do assunto.
