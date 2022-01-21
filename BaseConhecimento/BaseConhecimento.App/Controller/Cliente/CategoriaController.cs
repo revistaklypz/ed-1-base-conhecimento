@@ -10,12 +10,12 @@ namespace BaseConhecimento.App.Controller.Cliente
     [ApiController]
     public class CategoriaController : ControllerBase
     {
-        public CategoriaController(IClienteCategoria domain)
+        public CategoriaController(IDataCategoria domain)
         {
             Domain = domain;
         }
 
-        public IClienteCategoria Domain { get; }
+        public IDataCategoria Domain { get; }
 
         [HttpGet("{apelido}")]
         public ClienteCategoria Get(string apelido) => Domain.ObterCategoria(apelido);

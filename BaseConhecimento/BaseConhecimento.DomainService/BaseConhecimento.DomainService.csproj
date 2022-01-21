@@ -22,12 +22,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SQLCategoria.resx</DependentUpon>
     </Compile>
+    <Compile Update="SQLConhecimento.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SQLConhecimento.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="SQLCategoria.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SQLCategoria.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SQLConhecimento.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SQLConhecimento.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

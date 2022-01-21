@@ -31,7 +31,8 @@ namespace BaseConhecimento.App
             services.AddControllers();
             services.AddRazorPages();
 
-            services.AddTransient<IClienteCategoria>(s => new ClienteCategoriaService(new CategoriaRepository(Connection)));
+            services.AddTransient<IDataCategoria>(s => new DataCategoria(Connection));
+            services.AddTransient<IDataConhecimento>(s => new DataConhecimento(Connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

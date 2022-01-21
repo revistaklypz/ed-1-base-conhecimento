@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BaseConhecimento.Domain
 {
-    public interface ICategoriaRepository
+    public interface IDataCategoria
     {
         IEnumerable<ClienteCategoria> ObterCategorias();
         IEnumerable<ClienteCategoria> ObterCategorias(string filtro);

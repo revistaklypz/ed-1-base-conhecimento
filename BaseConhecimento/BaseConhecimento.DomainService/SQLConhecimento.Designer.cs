@@ -22,14 +22,14 @@ namespace BaseConhecimento.DomainService {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SQLCategoria {
+    internal class SQLConhecimento {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SQLCategoria() {
+        internal SQLConhecimento() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace BaseConhecimento.DomainService {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BaseConhecimento.DomainService.SQLCategoria", typeof(SQLCategoria).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BaseConhecimento.DomainService.SQLConhecimento", typeof(SQLConhecimento).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,12 @@ namespace BaseConhecimento.DomainService {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a select * from vm_categoria_cliente;.
-        /// </summary>
-        internal static string Get {
-            get {
-                return ResourceManager.GetString("Get", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a select * from vm_categoria_cliente where apelido = @apelido;.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a select * 
+        ///from 
+        ///			vm_base_conhecimento		vbc
+        ///    join	vm_categoria_cliente				vc	on	vbc.categoriaid = vc.id
+        ///where
+        ///	vbc.apelido = @apelido;.
         /// </summary>
         internal static string GetApelido {
             get {
@@ -79,19 +75,31 @@ namespace BaseConhecimento.DomainService {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a select 
-        ///		vct.modificadoem, vct.nome, vct.apelido, vct.descricao, count(bc.id) NumeroCategorias, 
-        ///		MATCH (vct.nome, vct.descricao) AGAINST (concat(@filtro, &apos;*&apos;) IN boolean mode) as score
+        ///   Consulta uma cadeia de caracteres localizada semelhante a select *, case when @filtro is null then 0 else MATCH (vbc.titulo, vbc.descricao) AGAINST (concat(@filtro, &apos;*&apos;) IN boolean mode) end score 
         ///from 
-        ///				vm_categoria 		vct
-        ///	left join	base_conhecimento	bc on vct.id = bc.categoria_id 
-        ///where  MATCH (vct.nome, vct.descricao) AGAINST (concat(@filtro, &apos;*&apos;) IN boolean mode)
-        ///group by vct.modificadoem, vct.nome, vct.apelido, vct.descricao
+        ///			vm_base_conhecimento		vbc
+        ///    join	vm_categoria_cliente				vc	on	vbc.categoriaid = vc.id
+        ///where 
+        ///			(@categoriaApelido is null or vc.Apelido = @categoriaApelido)
+        ///    and 	 (@filtro is null or MATCH (vbc.titulo, vbc.descricao) AGAINST (concat(@filtro, &apos;*&apos;) IN boolean mode))
         ///order by score desc;.
         /// </summary>
         internal static string GetFiltro {
             get {
                 return ResourceManager.GetString("GetFiltro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a select * 
+        ///from 
+        ///			vm_base_conhecimento		vbc
+        ///    join	vm_categoria_cliente				vc	on	vbc.categoriaid = vc.id
+        ///.
+        /// </summary>
+        internal static string GetList {
+            get {
+                return ResourceManager.GetString("GetList", resourceCulture);
             }
         }
     }

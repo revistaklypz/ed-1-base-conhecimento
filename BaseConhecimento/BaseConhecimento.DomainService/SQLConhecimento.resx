@@ -117,21 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Get" xml:space="preserve">
-    <value>select * from vm_categoria_cliente;</value>
-  </data>
   <data name="GetApelido" xml:space="preserve">
-    <value>select * from vm_categoria_cliente where apelido = @apelido;</value>
+    <value>select * 
+from 
+			vm_base_conhecimento		vbc
+    join	vm_categoria_cliente				vc	on	vbc.categoriaid = vc.id
+where
+	vbc.apelido = @apelido;</value>
   </data>
   <data name="GetFiltro" xml:space="preserve">
-    <value>select 
-		vct.modificadoem, vct.nome, vct.apelido, vct.descricao, count(bc.id) NumeroCategorias, 
-		MATCH (vct.nome, vct.descricao) AGAINST (concat(@filtro, '*') IN boolean mode) as score
+    <value>select *, case when @filtro is null then 0 else MATCH (vbc.titulo, vbc.descricao) AGAINST (concat(@filtro, '*') IN boolean mode) end score 
 from 
-				vm_categoria 		vct
-	left join	base_conhecimento	bc on vct.id = bc.categoria_id 
-where  MATCH (vct.nome, vct.descricao) AGAINST (concat(@filtro, '*') IN boolean mode)
-group by vct.modificadoem, vct.nome, vct.apelido, vct.descricao
+			vm_base_conhecimento		vbc
+    join	vm_categoria_cliente				vc	on	vbc.categoriaid = vc.id
+where 
+			(@categoriaApelido is null or vc.Apelido = @categoriaApelido)
+    and 	 (@filtro is null or MATCH (vbc.titulo, vbc.descricao) AGAINST (concat(@filtro, '*') IN boolean mode))
 order by score desc;</value>
+  </data>
+  <data name="GetList" xml:space="preserve">
+    <value>select * 
+from 
+			vm_base_conhecimento		vbc
+    join	vm_categoria_cliente				vc	on	vbc.categoriaid = vc.id
+</value>
   </data>
 </root>
